@@ -8,9 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    private let animals = AnimalService.getAll()
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        NavigationView {
+            List(animals, id: \.name) { animal in
+                NavigationLink(destination: SharedDetailView(animal: animal)) {
+                    Text(animal.image)
+                        .font(.custom("Arial", size: 90))
+                    Text(animal.name)
+                        .font(.title)
+                }
+            }
+            .navigationTitle("Animals")
+        }
+        
     }
 }
 
